@@ -37,7 +37,7 @@
             this.ClearUrlButton = new System.Windows.Forms.Button();
             this.StartOrStopDownloadButton = new System.Windows.Forms.Button();
             this.MenuBar = new System.Windows.Forms.MenuStrip();
-            this.File = new System.Windows.Forms.ToolStripMenuItem();
+            this.file = new System.Windows.Forms.ToolStripMenuItem();
             this.exitApp = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +56,9 @@
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.VideoInformationView = new System.Windows.Forms.ListView();
+            this.VideoInformationLabel = new System.Windows.Forms.Label();
+            this.UpdateVideoWorkor = new System.ComponentModel.BackgroundWorker();
             this.MenuBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,7 +80,6 @@
             this.UrlText.BackColor = System.Drawing.SystemColors.Window;
             this.UrlText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.UrlText.Location = new System.Drawing.Point(8, 8);
-            this.UrlText.Multiline = true;
             this.UrlText.Name = "UrlText";
             this.UrlText.Size = new System.Drawing.Size(100, 20);
             this.UrlText.TabIndex = 1;
@@ -138,12 +140,13 @@
             this.StartOrStopDownloadButton.TabIndex = 6;
             this.StartOrStopDownloadButton.Text = "Start Download";
             this.StartOrStopDownloadButton.UseVisualStyleBackColor = true;
+            this.StartOrStopDownloadButton.Click += new System.EventHandler(this.StartOrStopDownloadButton_Click);
             // 
             // MenuBar
             // 
             this.MenuBar.BackColor = System.Drawing.Color.DarkBlue;
             this.MenuBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.File,
+            this.file,
             this.editToolStripMenuItem,
             this.Tools,
             this.helpToolStripMenuItem});
@@ -153,20 +156,21 @@
             this.MenuBar.Size = new System.Drawing.Size(800, 24);
             this.MenuBar.TabIndex = 7;
             this.MenuBar.Text = "Menu Bar";
+            this.MenuBar.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.MenuBar_ItemClicked);
             // 
-            // File
+            // file
             // 
-            this.File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.file.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitApp});
-            this.File.Name = "File";
-            this.File.Size = new System.Drawing.Size(37, 20);
-            this.File.Text = "&File";
-            this.File.Click += new System.EventHandler(this.exitApp_);
+            this.file.Name = "file";
+            this.file.Size = new System.Drawing.Size(37, 20);
+            this.file.Text = "&File";
+            this.file.Click += new System.EventHandler(this.exitApp_);
             // 
             // exitApp
             // 
             this.exitApp.Name = "exitApp";
-            this.exitApp.Size = new System.Drawing.Size(93, 22);
+            this.exitApp.Size = new System.Drawing.Size(180, 22);
             this.exitApp.Text = "E&xit";
             this.exitApp.Click += new System.EventHandler(this.exitApp_Click);
             // 
@@ -189,20 +193,20 @@
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.undoToolStripMenuItem.Text = "&Undo";
             // 
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.redoToolStripMenuItem.Text = "&Redo";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // cutToolStripMenuItem
             // 
@@ -219,7 +223,7 @@
             this.copyToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.copyToolStripMenuItem.Text = "&Copy";
             // 
             // pasteToolStripMenuItem
@@ -228,18 +232,18 @@
             this.pasteToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pasteToolStripMenuItem.Text = "&Paste";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(141, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.selectAllToolStripMenuItem.Text = "Select &All";
             // 
             // Tools
@@ -253,7 +257,7 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.optionsToolStripMenuItem.Text = "&Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -298,6 +302,40 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             // 
+            // VideoInformationView
+            // 
+            this.VideoInformationView.BackColor = System.Drawing.Color.White;
+            this.VideoInformationView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.VideoInformationView.Dock = System.Windows.Forms.DockStyle.Right;
+            this.VideoInformationView.HideSelection = false;
+            this.VideoInformationView.Location = new System.Drawing.Point(679, 24);
+            this.VideoInformationView.MultiSelect = false;
+            this.VideoInformationView.Name = "VideoInformationView";
+            this.VideoInformationView.Size = new System.Drawing.Size(121, 426);
+            this.VideoInformationView.TabIndex = 9;
+            this.VideoInformationView.UseCompatibleStateImageBehavior = false;
+            this.VideoInformationView.View = System.Windows.Forms.View.SmallIcon;
+            this.VideoInformationView.Visible = false;
+            this.VideoInformationView.SelectedIndexChanged += new System.EventHandler(this.VideoInformationView_SelectedIndexChanged);
+            // 
+            // VideoInformationLabel
+            // 
+            this.VideoInformationLabel.AccessibleName = "Video Information";
+            this.VideoInformationLabel.AutoSize = true;
+            this.VideoInformationLabel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.VideoInformationLabel.Location = new System.Drawing.Point(590, 24);
+            this.VideoInformationLabel.Name = "VideoInformationLabel";
+            this.VideoInformationLabel.Size = new System.Drawing.Size(89, 13);
+            this.VideoInformationLabel.TabIndex = 8;
+            this.VideoInformationLabel.Text = "Video Information";
+            this.VideoInformationLabel.Visible = false;
+            // 
+            // UpdateVideoWorkor
+            // 
+            this.UpdateVideoWorkor.WorkerSupportsCancellation = true;
+            this.UpdateVideoWorkor.DoWork += new System.ComponentModel.DoWorkEventHandler(this.UpdateVideoWorkor_DoWork);
+            this.UpdateVideoWorkor.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.UpdateVideoWorkor_RunWorkerCompleted);
+            // 
             // MainForm
             // 
             this.AccessibleName = "IcePhoenixYoutubeDownloader";
@@ -306,6 +344,8 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.DarkBlue;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.VideoInformationLabel);
+            this.Controls.Add(this.VideoInformationView);
             this.Controls.Add(this.StartOrStopDownloadButton);
             this.Controls.Add(this.ClearUrlButton);
             this.Controls.Add(this.FormatComboBox);
@@ -338,7 +378,7 @@
         private System.Windows.Forms.Button ClearUrlButton;
         private System.Windows.Forms.Button StartOrStopDownloadButton;
         private System.Windows.Forms.MenuStrip MenuBar;
-        private System.Windows.Forms.ToolStripMenuItem File;
+        private System.Windows.Forms.ToolStripMenuItem file;
         private System.Windows.Forms.ToolStripMenuItem exitApp;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
@@ -357,6 +397,9 @@
         private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ListView VideoInformationView;
+        private System.Windows.Forms.Label VideoInformationLabel;
+        private System.ComponentModel.BackgroundWorker UpdateVideoWorkor;
     }
 }
 
