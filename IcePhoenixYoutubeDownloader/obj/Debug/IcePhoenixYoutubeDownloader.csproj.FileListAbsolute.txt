@@ -8,3 +8,4 @@ D:\working-project\dotnet\IcePhoenixYoutubeDownloader\IcePhoenixYoutubeDownloade
 D:\working-project\dotnet\IcePhoenixYoutubeDownloader\IcePhoenixYoutubeDownloader\obj\Debug\IcePhoenixYoutubeDownloader.csproj.CoreCompileInputs.cache
 D:\working-project\dotnet\IcePhoenixYoutubeDownloader\IcePhoenixYoutubeDownloader\obj\Debug\IcePhoenixYoutubeDownloader.exe
 D:\working-project\dotnet\IcePhoenixYoutubeDownloader\IcePhoenixYoutubeDownloader\obj\Debug\IcePhoenixYoutubeDownloader.pdb
+D:\working-project\dotnet\IcePhoenixYoutubeDownloader\IcePhoenixYoutubeDownloader\obj\Debug\IcePhoenixYoutubeDownloader.OptionForm.resources
