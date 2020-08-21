@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VideoLibrary;
-using System.IO;
 namespace IcePhoenixYoutubeDownloader
 
 {
@@ -24,10 +19,24 @@ namespace IcePhoenixYoutubeDownloader
             {
                 var youTube = YouTube.Default;
                 var video = youTube.GetVideo(Link);
- File.WriteAllBytes(@"C:\new\" + video.FullName, video.GetBytes());
+                // File.WriteAllBytes(@"C:\new\" + video.FullName, video.GetBytes());
             }); //end async task body
         }//end method download
-
+        /*
+        private void UpdateVideoInformation(string Link)
+        {
+            var youTube = YouTube.Default;
+            var video = youTube.GetVideo(Link);
+            string f = video.FullName;
+            string format = video.Format.ToString();
+            string AudioBitrate = video.AudioBitrate.ToString();
+            string Resolution = video.Resolution.ToString();
+            VideoInformationView.Items.Add("FullName: " + f);
+            VideoInformationView.Items.Add("File format: " + format);
+            VideoInformationView.Items.Add("AudioBitrate: " + AudioBitrate);
+            VideoInformationView.Items.Add("Video Resolution: " + Resolution + " P");
+        }//end method UpdateDownloadInformation
+        */
         private void MainForm_Load(object sender, EventArgs e)
         {
             SelectFormatLabel.Visible = false;
@@ -44,7 +53,7 @@ namespace IcePhoenixYoutubeDownloader
         }
 
         private void exitApp_(object sender, EventArgs e)
-        {   
+        {
 
         }
 
@@ -56,7 +65,7 @@ namespace IcePhoenixYoutubeDownloader
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var option = new OptionForm();
-            option.ShowDialog();        
+            option.ShowDialog();
         }
 
         private void ConvertCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -71,7 +80,7 @@ namespace IcePhoenixYoutubeDownloader
                 SelectFormatLabel.Visible = false;
                 FormatComboBox.Visible = false;
             }//end else
-            }
+        }
 
         private void UrlText_TextChanged(object sender, EventArgs e)
         {
@@ -116,7 +125,7 @@ namespace IcePhoenixYoutubeDownloader
 
         private void UpdateVideoWorkor_DoWork(object sender, DoWorkEventArgs e)
         {
-//            Download(UrlText.Text);
+            Download(UrlText.Text);
         }//end methodUpdateVideoWorkor
 
         private void UpdateVideoWorkor_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -125,6 +134,16 @@ namespace IcePhoenixYoutubeDownloader
         }
 
         private void VideoInformationView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DownloadBar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SelectFormatLabel_Click(object sender, EventArgs e)
         {
 
         }
