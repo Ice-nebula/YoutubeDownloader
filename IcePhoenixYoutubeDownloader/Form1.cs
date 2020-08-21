@@ -24,7 +24,7 @@ namespace IcePhoenixYoutubeDownloader
             {
                 var youTube = YouTube.Default;
                 var video = youTube.GetVideo(Link);
- file.WriteAllBytes(@"C:\new\" + video.FullName, video.GetBytes());
+ File.WriteAllBytes(@"C:\new\" + video.FullName, video.GetBytes());
             }); //end async task body
         }//end method download
 
