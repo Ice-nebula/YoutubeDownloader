@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace IcePhoenixYoutubeDownloader
 {
-    public partial class OptionForm : Form
+    public partial class MainWindow : Form
     {
-        public OptionForm()
+        public MainWindow()
         {
             InitializeComponent();
         }
