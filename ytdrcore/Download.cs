@@ -21,21 +21,21 @@ namespace ytdrcore
         }//end class constructor body
 
         //declare your method
-        public async Task GetVideo(string link)
+        public void GetVideo(string link)
         {
-            await Task.Run(() =>
-            {
+//            await Task.Run(() =>
+//            {
                 var Youtube = YouTube.Default;
-                var Video = Youtube.GetVideoAsync(link);
+                var Video = Youtube.GetVideoAsync("https://www.youtube.com/watch?v=kfm5LpRo4-I");
                 var Vr = Video.Result;
                 Title = Vr.Title;
                 var f = Vr.Format;
                 Format = Convert.ToString(f);
                 AudioBitrate = Vr.AudioBitrate;
 
-                File.WriteAllBytes(Path.Combine(Paths, Vr.FullName),Vr.GetBytes());
+                File.WriteAllBytes(Path.Combine(@"c:\new\" , Vr.FullName),Vr.GetBytes());
                 
-            });//end async body
+//            });//end async body
         }//end method GETVideo
     }//end class
 }//end name space
