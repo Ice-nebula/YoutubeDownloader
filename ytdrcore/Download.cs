@@ -55,18 +55,32 @@ namespace ytdrcore
                 var Youtube = YouTube.Default;
                 var Video = Youtube.GetVideoAsync(link);
                 var Vr = Video.Result;
-                Title = Vr.Title;
-                var f = Vr.Format;
-                Format = Convert.ToString(f);
-                AudioBitrate = Vr.AudioBitrate;
-                FullName = Vr.FullName;
-                audioFormats = Vr.AudioFormat.ToString();
-                return Vr.GetBytes();
+                var BytesData = Vr.GetBytes();
+                    return BytesData;
             }//end try body
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }//end catch body
         }//end method GETVideo
+        public void GetMeta(string Link)
+        {
+            try
+            {
+                var Youtube = YouTube.Default;
+                var Video = Youtube.GetVideoAsync(Link);
+                var Vr = Video.Result;
+                Title = Vr.Title;
+                var f = Vr.Format;
+                Format = Convert.ToString(f);
+                AudioBitrate = Vr.AudioBitrate;
+                FullName = Vr.FullName;
+                audioFormats = Vr.AudioFormat.ToString();
+            }//end try body
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }//end catch body
+        }//end method GetMeta
     }//end class
 }//end name space

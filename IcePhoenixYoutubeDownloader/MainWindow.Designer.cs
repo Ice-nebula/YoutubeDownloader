@@ -36,6 +36,7 @@
             this.UrlLabel = new System.Windows.Forms.Label();
             this.DownloadProgressBar = new System.Windows.Forms.ProgressBar();
             this.ProgressBarLabel = new System.Windows.Forms.Label();
+            this.GetMetaWorkor = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // UrlText
@@ -43,7 +44,8 @@
             this.UrlText.Location = new System.Drawing.Point(8, 8);
             this.UrlText.Name = "UrlText";
             this.UrlText.Size = new System.Drawing.Size(100, 20);
-            this.UrlText.TabIndex = 1;
+            this.UrlText.TabIndex = 0;
+            this.UrlText.TextChanged += new System.EventHandler(this.UrlText_TextChanged);
             // 
             // StartDownload
             // 
@@ -68,19 +70,21 @@
             // 
             this.DownloadInformation.AccessibleName = "Download Information";
             this.DownloadInformation.AutoSize = true;
+            this.DownloadInformation.Enabled = false;
             this.DownloadInformation.Location = new System.Drawing.Point(0, 0);
             this.DownloadInformation.Name = "DownloadInformation";
             this.DownloadInformation.Size = new System.Drawing.Size(110, 13);
-            this.DownloadInformation.TabIndex = 3;
+            this.DownloadInformation.TabIndex = 1;
             this.DownloadInformation.Text = "Download Information";
             // 
             // InformationList
             // 
+            this.InformationList.Enabled = false;
             this.InformationList.HideSelection = false;
             this.InformationList.Location = new System.Drawing.Point(0, 4);
             this.InformationList.Name = "InformationList";
             this.InformationList.Size = new System.Drawing.Size(121, 97);
-            this.InformationList.TabIndex = 4;
+            this.InformationList.TabIndex = 2;
             this.InformationList.UseCompatibleStateImageBehavior = false;
             this.InformationList.View = System.Windows.Forms.View.SmallIcon;
             this.InformationList.SelectedIndexChanged += new System.EventHandler(this.InformationList_SelectedIndexChanged);
@@ -113,6 +117,11 @@
             this.ProgressBarLabel.Size = new System.Drawing.Size(0, 13);
             this.ProgressBarLabel.TabIndex = 6;
             // 
+            // GetMetaWorkor
+            // 
+            this.GetMetaWorkor.DoWork += new System.ComponentModel.DoWorkEventHandler(this.GetMetaWorkor_DoWork);
+            this.GetMetaWorkor.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.GetMetaWorkor_RunWorkerCompleted);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -143,5 +152,6 @@
         private System.Windows.Forms.Label UrlLabel;
         private System.Windows.Forms.ProgressBar DownloadProgressBar;
         private System.Windows.Forms.Label ProgressBarLabel;
+        private System.ComponentModel.BackgroundWorker GetMetaWorkor;
     }
 }
