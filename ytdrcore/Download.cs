@@ -11,31 +11,62 @@ namespace ytdrcore
     {
         //declare your class attribute
         private string Title;
-        private string Paths;
+        private string SavePath;
         private string Format;
+        private string FullName;
         private int AudioBitrate;
+        private string audioFormats;
         //end atibute body
-        public Download(string Paths)//class constructor
+        // start Properties body
+        public string AudioFormats
         {
-            this.Paths = Paths;
+            get { return this.audioFormats; }
+        }
+        public string FullNames{
+            get { return this.FullName; }
+            }
+        public string savePath
+        {
+            get { return this.SavePath; }
+            set { this.SavePath = value; }
+        }
+        public string Titles
+        {
+            get { return this.Title; }
+        }
+        public string Formats
+        {
+            get { return this.Format; }
+        }
+        public int AudioBitrates {
+            get { return this.AudioBitrate; }
+        }
+        //end Properties body
+        public Download()//class constructor
+        {
+//parse
         }//end class constructor body
 
         //declare your method
         public void GetVideo(string link)
         {
-//            await Task.Run(() =>
-//            {
+            try
+            {
                 var Youtube = YouTube.Default;
-                var Video = Youtube.GetVideoAsync("https://www.youtube.com/watch?v=kfm5LpRo4-I");
+                var Video = Youtube.GetVideoAsync(link);
                 var Vr = Video.Result;
                 Title = Vr.Title;
                 var f = Vr.Format;
                 Format = Convert.ToString(f);
                 AudioBitrate = Vr.AudioBitrate;
-
-                File.WriteAllBytes(Path.Combine(@"c:\new\" , Vr.FullName),Vr.GetBytes());
-                
-//            });//end async body
+                FullName = Vr.FullName;
+                audioFormats = Vr.AudioFormat.ToString();
+                File.WriteAllBytes(Path.Combine(@SavePath, Vr.FullName), Vr.GetBytes());
+            }//end try body
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }//end catch body
         }//end method GETVideo
     }//end class
 }//end name space

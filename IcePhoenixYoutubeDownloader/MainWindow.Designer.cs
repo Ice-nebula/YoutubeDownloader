@@ -46,7 +46,7 @@
             // StartDownload
             // 
             this.StartDownload.AccessibleName = "Start Download";
-            this.StartDownload.Location = new System.Drawing.Point(16, 15);
+            this.StartDownload.Location = new System.Drawing.Point(16, 14);
             this.StartDownload.Name = "StartDownload";
             this.StartDownload.Size = new System.Drawing.Size(75, 23);
             this.StartDownload.TabIndex = 2;
@@ -59,6 +59,7 @@
             this.DownloadWorker.WorkerReportsProgress = true;
             this.DownloadWorker.WorkerSupportsCancellation = true;
             this.DownloadWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.DownloadWorker_DoWork);
+            this.DownloadWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DownloadWorker_RunWorkerCompleted);
             // 
             // DownloadInformation
             // 
@@ -73,17 +74,19 @@
             // InformationList
             // 
             this.InformationList.HideSelection = false;
-            this.InformationList.Location = new System.Drawing.Point(0, 1);
+            this.InformationList.Location = new System.Drawing.Point(0, 2);
             this.InformationList.Name = "InformationList";
             this.InformationList.Size = new System.Drawing.Size(121, 97);
             this.InformationList.TabIndex = 4;
             this.InformationList.UseCompatibleStateImageBehavior = false;
+            this.InformationList.View = System.Windows.Forms.View.SmallIcon;
+            this.InformationList.SelectedIndexChanged += new System.EventHandler(this.InformationList_SelectedIndexChanged);
             // 
             // UrlLabel
             // 
             this.UrlLabel.AccessibleName = "Enter a Url";
             this.UrlLabel.AutoSize = true;
-            this.UrlLabel.Location = new System.Drawing.Point(0, 0);
+            this.UrlLabel.Location = new System.Drawing.Point(0, -1);
             this.UrlLabel.Name = "UrlLabel";
             this.UrlLabel.Size = new System.Drawing.Size(57, 13);
             this.UrlLabel.TabIndex = 0;
@@ -93,7 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Desktop;
+            this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.UrlLabel);
             this.Controls.Add(this.InformationList);
