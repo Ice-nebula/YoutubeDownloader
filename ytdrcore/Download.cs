@@ -48,7 +48,7 @@ namespace ytdrcore
         }//end class constructor body
 
         //declare your method
-        public void GetVideo(string link)
+        public byte[] GetVideo(string link)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace ytdrcore
                 AudioBitrate = Vr.AudioBitrate;
                 FullName = Vr.FullName;
                 audioFormats = Vr.AudioFormat.ToString();
-                File.WriteAllBytes(Path.Combine(@SavePath, Vr.FullName), Vr.GetBytes());
+                return Vr.GetBytes();
             }//end try body
             catch (Exception e)
             {

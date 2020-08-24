@@ -22,7 +22,12 @@ namespace IcePhoenixYoutubeDownloader
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+
             D.savePath = @"c:\new\";
+            if (Directory.Exists(D.savePath) == false)
+            {
+                Directory.CreateDirectory(D.savePath);
+            }//end if
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -56,9 +61,11 @@ namespace IcePhoenixYoutubeDownloader
 
         private void DownloadWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+
             try
             {
-                D.GetVideo(UrlText.Text);
+                    var ByteData = D.GetVideo(UrlText.Text);
+                File.WriteAllBytes(Path.Combine(D.savePath, D.FullNames), ByteData);
             }//end try
             catch (Exception ex)
             {
@@ -89,7 +96,7 @@ namespace IcePhoenixYoutubeDownloader
             {
                 InformationList.Items.Add("Video Format: " + D.Formats);
             }//end if formats
-            if (D.savePath != null)
+            if (D.savePath != null && D.FullNames != null)
             {
               InformationList.Items.Add("File Path: " + Path.Combine(D.savePath, D.FullNames));
                     }//end if Path
@@ -97,6 +104,13 @@ namespace IcePhoenixYoutubeDownloader
 
         private void InformationList_SelectedIndexChanged(object sender, EventArgs e)
         {
+           
+        }
+
+        private void DownloadWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            DownloadProgressBar.Value = e.ProgressPercentage;
+            //ProgressBarLabel.Text = 
 
         }
     }

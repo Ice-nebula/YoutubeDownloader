@@ -34,6 +34,8 @@
             this.DownloadInformation = new System.Windows.Forms.Label();
             this.InformationList = new System.Windows.Forms.ListView();
             this.UrlLabel = new System.Windows.Forms.Label();
+            this.DownloadProgressBar = new System.Windows.Forms.ProgressBar();
+            this.ProgressBarLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // UrlText
@@ -59,6 +61,7 @@
             this.DownloadWorker.WorkerReportsProgress = true;
             this.DownloadWorker.WorkerSupportsCancellation = true;
             this.DownloadWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.DownloadWorker_DoWork);
+            this.DownloadWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.DownloadWorker_ProgressChanged);
             this.DownloadWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DownloadWorker_RunWorkerCompleted);
             // 
             // DownloadInformation
@@ -74,7 +77,7 @@
             // InformationList
             // 
             this.InformationList.HideSelection = false;
-            this.InformationList.Location = new System.Drawing.Point(0, 2);
+            this.InformationList.Location = new System.Drawing.Point(0, 4);
             this.InformationList.Name = "InformationList";
             this.InformationList.Size = new System.Drawing.Size(121, 97);
             this.InformationList.TabIndex = 4;
@@ -92,12 +95,32 @@
             this.UrlLabel.TabIndex = 0;
             this.UrlLabel.Text = "Enter a Url";
             // 
+            // DownloadProgressBar
+            // 
+            this.DownloadProgressBar.AccessibleName = "Download Progress Bar";
+            this.DownloadProgressBar.BackColor = System.Drawing.Color.FloralWhite;
+            this.DownloadProgressBar.Location = new System.Drawing.Point(0, 0);
+            this.DownloadProgressBar.Name = "DownloadProgressBar";
+            this.DownloadProgressBar.Size = new System.Drawing.Size(100, 23);
+            this.DownloadProgressBar.Step = 1;
+            this.DownloadProgressBar.TabIndex = 5;
+            // 
+            // ProgressBarLabel
+            // 
+            this.ProgressBarLabel.AutoSize = true;
+            this.ProgressBarLabel.Location = new System.Drawing.Point(8, 8);
+            this.ProgressBarLabel.Name = "ProgressBarLabel";
+            this.ProgressBarLabel.Size = new System.Drawing.Size(0, 13);
+            this.ProgressBarLabel.TabIndex = 6;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ProgressBarLabel);
+            this.Controls.Add(this.DownloadProgressBar);
             this.Controls.Add(this.UrlLabel);
             this.Controls.Add(this.InformationList);
             this.Controls.Add(this.DownloadInformation);
@@ -118,5 +141,7 @@
         private System.Windows.Forms.Label DownloadInformation;
         private System.Windows.Forms.ListView InformationList;
         private System.Windows.Forms.Label UrlLabel;
+        private System.Windows.Forms.ProgressBar DownloadProgressBar;
+        private System.Windows.Forms.Label ProgressBarLabel;
     }
 }
