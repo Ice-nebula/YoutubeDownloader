@@ -93,11 +93,22 @@ namespace IcePhoenixYoutubeDownloader
         private void UrlText_TextChanged(object sender, EventArgs e)
         {
             string url = UrlText.Text;
-            if (String.IsNullOrWhiteSpace(url) != true && url.Contains("https://www.youtube.com") == true)
+            try
             {
-                GetMetaWorkor.RunWorkerAsync();
-
-            }//end if
+                if (String.IsNullOrWhiteSpace(url) != true && url.Contains("https://www.youtube.com") == true)
+                {
+                    GetMetaWorkor.RunWorkerAsync();
+                }//end if
+            }//end try
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message, "Error");
+                return;
+            }//end catch
+            if (String.IsNullOrWhiteSpace(url) == true && url.Contains("https://www.youtube.com") != true)
+            {
+                UiUpdateWorkor.RunWorkerAsync();
+            }
             }
 
             private void GetMetaWorkor_DoWork(object sender, DoWorkEventArgs e)
@@ -112,6 +123,7 @@ namespace IcePhoenixYoutubeDownloader
             {
                 InformationList.Enabled = true;
                 DownloadInformation.Enabled = true;
+                ClearUrl.Enabled = true;
             }
             if (D.Titles != null)
                 {
@@ -139,5 +151,32 @@ namespace IcePhoenixYoutubeDownloader
                 }//end if Path
 
             }
+
+        private void UiUpdateWorkor_DoWork(object sender, DoWorkEventArgs e)
+        {
+          
         }
+
+        private void UiUpdateWorkor_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            
+            string url = UrlText.Text;
+            if (url.Length <= 0)
+            {
+                InformationList.Enabled = false;
+                DownloadInformation.Enabled = false;
+                ClearUrl.Enabled = false;
+            }
+        }
+
+        private void ClearUrl_Click(object sender, EventArgs e)
+        {
+            UrlText.Clear();
+        }
+
+        private void ProgressBarLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
     }
